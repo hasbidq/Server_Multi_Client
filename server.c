@@ -123,3 +123,48 @@ int main() {
     // Mengatur alamat server
     memset(&serverAddr, '\0', sizeof(serverAddr));
     serverAddr.sin
+        serverAddr.sin_family = AF_INET;
+    serverAddr.sin_port = htons(PORT);
+    serverAddr.sin_addr.s_addr = inet_addr("127.0.0.1");
+
+    // Binding
+    ret = bind(sockfd, (struct sockaddr*)&serverAddr, sizeof(serverAddr));
+    if (ret < 0) {
+        perror("Error in binding");
+        close(sockfd);
+        exit(1);
+    }
+    printf("[+]Bind to port %d\n", PORT);
+
+    // Listening
+    if (listen(sockfd, 10) == 0) {
+        printf("[+]Listening...\n");
+    } else {
+        perror("Error in listening");
+        close(sockfd);
+        exit(1);
+    }
+
+    // Menerima koneksi klien
+    while (1) {
+        addr_size = sizeof(newAddr);
+        int newSocket = accept(sockfd, (struct sockaddr*)&newAddr, &addr_size);
+        if (newSocket < 0) {
+            perror("Error in accepting connection");
+            continue;
+        }
+
+        printf("Connection accepted from %s:%d\n", inet_ntoa(newAddr.sin_addr), ntohs(newAddr.sin_port));
+
+        // Membuat proses anak untuk menangani setiap klien
+        if ((childpid = fork()) == 0) {
+            close(sockfd); // Proses anak tidak perlu menggunakan socket utama
+            handleClient(newSocket); // Tangani klien di proses anak
+            exit(0); // Proses anak selesai
+        }
+        close(newSocket); // Proses induk tidak perlu menggunakan socket klien
+    }
+
+    close(sockfd); // Tutup socket utama jika server berhenti
+    return 0;
+}
