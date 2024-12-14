@@ -19,8 +19,8 @@ Repositori ini berisi implementasi server multi-client sederhana menggunakan bah
 1. **Clone repositori**
 
    ```bash
-   git clone https://github.com/yourusername/multi-client-server.git
-   cd multi-client-server
+   git clone https://github.com/hasbidq/Server_Multi_Client.git
+   cd Server_Multi_Client
    ```
 
 2. **Kompilasi server**
