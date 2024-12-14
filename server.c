@@ -122,8 +122,7 @@ int main() {
 
     // Mengatur alamat server
     memset(&serverAddr, '\0', sizeof(serverAddr));
-    serverAddr.sin
-        serverAddr.sin_family = AF_INET;
+    serverAddr.sin_family = AF_INET;
     serverAddr.sin_port = htons(PORT);
     serverAddr.sin_addr.s_addr = inet_addr("127.0.0.1");
 
