@@ -4,7 +4,7 @@ Repositori ini berisi implementasi server multi-client sederhana menggunakan bah
 
 ## Fitur
 
-- **Dukungan Multi-klien**: Menangani hingga 5 klien secara bersamaan.
+- **Dukungan Multi-klien**: Menangani hingga banyak klien secara bersamaan.
 - **Autentikasi**: Klien harus memasukkan kata sandi untuk mengakses server.
 - **Layanan Echo**: Server mengembalikan pesan yang diterima dari klien.
 - **Pencatatan Log**: Mencatat semua koneksi, pemutusan koneksi, dan pesan klien ke file (`server.log`).
